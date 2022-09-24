@@ -3,6 +3,7 @@ package com.bolsadeideas.springboot.web.app.controllers;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +16,13 @@ import com.bolsadeideas.springboot.web.app.models.Usuario;
 @RequestMapping("/app")
 public class IndexController {
 	
+	@Value("${texto.indexcontroller.index.saludo}")
+	private String indexSaludo;
+	
 	@GetMapping({"", "/", "/index", "/home"})
 	public String index(Model model) {
 		model.addAttribute("titulo", "Spring 5");
-		model.addAttribute("saludo", "¡Hola Spring Framework con Model!");
+		model.addAttribute("saludo", indexSaludo);
 		return "index";
 	}
 	
