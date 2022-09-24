@@ -11,4 +11,8 @@ public class ItemFactura {
 	
 	private Integer cantidad;
 	
+	public Integer calcularTotal() {
+		return producto.getPrecio() * cantidad;
+	}
+	
 }
