@@ -2,10 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"/>
+<link rel="stylesheet" type="text/css" th:href="@{../css/styles.css}"></link>
 <title th:text="${titulo}"></title>
 </head>
 <body>
-	<h1 th:text="${titulo}"></h1>
+	<h1 class="color-red" th:text="${titulo}"></h1>
+	<h2 class="color-blue">Estilos css estático</h2>
  	<ul>
 		<li><a th:href="@{/variables/string/} + 'Naciste en Abril' + '/' + 13">/variables/string/Naciste en Abril/13</a></li>
 	</ul>

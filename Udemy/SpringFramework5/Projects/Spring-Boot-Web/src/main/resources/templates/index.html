@@ -2,9 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"></link>
 <title th:text="${titulo}"></title>
 </head>
 <body>
- 	<h1 th:text="${saludo}"></h1>
+ 	<h1 class="color-red" th:text="${saludo}"></h1>
+ 	<h2 class="color-blue">Salida a Hangar:</h2>
+ 	<img th:src="@{images/melos.png}">
 </body>
 </html>
