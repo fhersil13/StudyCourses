@@ -2,19 +2,25 @@ package com.bolsadeideas.springboot.form.app.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class FormController {
 
-	@RequestMapping(value = "/form", method = RequestMethod.GET)
+	@GetMapping("/form")
 	public String form(Model model) {
+		model.addAttribute("titulo", "Formulario Usuarios");
 		return "form";
 	}
 	
-	@RequestMapping(value = "/form", method = RequestMethod.POST)
-	public String procesar(Model model) {
+	@PostMapping("/form")
+	public String procesar(@RequestParam String username, @RequestParam String password, @RequestParam String email, Model model) {
+		model.addAttribute("titulo", "Resultado Formulario Usuarios");
+		model.addAttribute("username", username);
+		model.addAttribute("password", password);
+		model.addAttribute("email", email);
 		return "resultado";
 	}
 	
