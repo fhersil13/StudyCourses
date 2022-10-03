@@ -23,7 +23,7 @@ public class UsuarioValidador implements Validator {
 		
 		if(usuario.getNombre().isEmpty()) errors.rejectValue("nombre", "NotEmpty.usuario.nombre");
 		
-		if(!usuario.getId().matches("[1-9]{1}[.][\\d]{3}[.][0-9]{3}[.][0-9]{3}")) errors.rejectValue("id", "pattern.usuario.id");
+//		if(!usuario.getId().matches("[1-9]{1}[.][\\d]{3}[.][0-9]{3}[.][0-9]{3}")) errors.rejectValue("id", "pattern.usuario.id");
 	}
 
 }

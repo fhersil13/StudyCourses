@@ -50,6 +50,20 @@
 			<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 		</div>
 		<div>
+			<label for="cuenta">Cuenta</label>
+			<div>
+				<input type="number" th:field="*{cuenta}" id="cuenta">
+			</div>
+			<div th:if="${#fields.hasErrors('cuenta')}" th:errors="*{cuenta}"></div>
+		</div>
+		<div>
+			<label for="fechaNacimiento">Fecha de nacimiento</label>
+			<div>
+				<input placeholder="dd/MM/yyyy" type="text" th:field="*{fechaNacimiento}" id="fechaNacimiento">
+			</div>
+			<div th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
+		</div>
+		<div>
 			<div>
 				<input type="submit" value="Enviar">
 			</div>
