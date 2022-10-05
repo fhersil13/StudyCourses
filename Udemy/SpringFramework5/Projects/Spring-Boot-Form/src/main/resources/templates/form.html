@@ -8,6 +8,16 @@
 	<h2 th:text="${titulo}"></h2>
 	<form th:action="@{/form}" th:object="${usuario}" method="post">
 		<div>
+			<label for="pais.id">País</label>
+			<div>
+				<select id="pais" th:field="*{pais.id}">
+					<option value="">--Seleccionar--</option>
+					<option th:each="pais : ${listaPaises}" th:text="${pais.nombre}" th:value="${pais.id}"></option>
+				</select>
+			</div>
+			<div th:if="${#fields.hasErrors('pais.id')}" th:errors="*{pais.id}"></div>
+		</div>
+		<div>
 			<label for="id">Id</label>
 			<div>
 				<input type="text" id="id" th:field="*{id}">
@@ -59,9 +69,11 @@
 		<div>
 			<label for="fechaNacimiento">Fecha de nacimiento</label>
 			<div>
-				<input placeholder="dd/MM/yyyy" type="text" th:field="*{fechaNacimiento}" id="fechaNacimiento">
+				<input placeholder="dd/MM/yyyy" type="date"
+					th:field="*{fechaNacimiento}" id="fechaNacimiento">
 			</div>
-			<div th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
+			<div th:if="${#fields.hasErrors('fechaNacimiento')}"
+				th:errors="*{fechaNacimiento}"></div>
 		</div>
 		<div>
 			<div>
