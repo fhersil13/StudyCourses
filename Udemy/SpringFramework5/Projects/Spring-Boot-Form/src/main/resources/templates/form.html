@@ -8,14 +8,22 @@
 	<h2 th:text="${titulo}"></h2>
 	<form th:action="@{/form}" th:object="${usuario}" method="post">
 		<div>
-			<label for="pais.id">País</label>
+			<label for="pais">País</label>
 			<div>
-				<select id="pais" th:field="*{pais.id}">
+				<select id="pais" th:field="*{pais}">
 					<option value="">--Seleccionar--</option>
 					<option th:each="pais : ${listaPaises}" th:text="${pais.nombre}" th:value="${pais.id}"></option>
 				</select>
 			</div>
-			<div th:if="${#fields.hasErrors('pais.id')}" th:errors="*{pais.id}"></div>
+			<div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
+		</div>
+		<div>
+			<label>Roles</label>
+			<div th:each="rol : ${listaRolesMap.entrySet()}">
+				<input type="checkbox" th:field="*{roles}" th:value="${rol.key}">
+				<label th:for="${#ids.prev('roles')}" th:text="${rol.value}"></label>
+			</div>
+			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
 		</div>
 		<div>
 			<label for="id">Id</label>
