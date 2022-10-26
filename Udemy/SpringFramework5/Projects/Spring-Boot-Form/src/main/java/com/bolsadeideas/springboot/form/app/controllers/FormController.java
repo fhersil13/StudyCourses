@@ -20,14 +20,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.bolsadeideas.springboot.form.app.editors.NombreMayusculaEditor;
 import com.bolsadeideas.springboot.form.app.editors.PaisPropertyEditor;
+import com.bolsadeideas.springboot.form.app.editors.RolesEditor;
 import com.bolsadeideas.springboot.form.app.models.domain.Pais;
+import com.bolsadeideas.springboot.form.app.models.domain.Rol;
 import com.bolsadeideas.springboot.form.app.models.domain.Usuario;
 import com.bolsadeideas.springboot.form.app.services.PaisService;
+import com.bolsadeideas.springboot.form.app.services.RolService;
 import com.bolsadeideas.springboot.form.app.validation.UsuarioValidador;
 
 @Controller
@@ -43,6 +47,12 @@ public class FormController {
 	@Autowired
 	private PaisPropertyEditor paisPropertyEditor;
 	
+	@Autowired
+	private RolService rolService;
+	
+	@Autowired
+	private RolesEditor rolesEditor;
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(validador);
@@ -56,6 +66,18 @@ public class FormController {
 		
 		binder.registerCustomEditor(Pais.class, "pais", paisPropertyEditor);
 		
+		binder.registerCustomEditor(Rol.class, "roles", rolesEditor);
+		
+	}
+	
+	@ModelAttribute("genero")
+	public List<String> listaGeneros() {
+		return Arrays.asList("Hombre", "Mujer");
+	}
+	
+	@ModelAttribute("listaRoles")
+	public List<Rol> listaRoles() {
+		return rolService.listar();
 	}
 	
 	@ModelAttribute("listaRolesString")
@@ -103,26 +125,29 @@ public class FormController {
 		usuario.setId("1.037.668.059");
 		usuario.setNombre("Fherney");
 		usuario.setApellido("Silva");
+		usuario.setHabilitar(true);
+		usuario.setValorSecreto("Algún valor secreto...");
+		usuario.setPais(new Pais(1, "CO", "Colombia"));
+		usuario.setRoles(Arrays.asList(new Rol(2, "Usuario", "ROL_USER")));
 		model.addAttribute("titulo", "Formulario Usuarios");
 		model.addAttribute("usuario", usuario);
 		return "form";
 	}
 	
 	@PostMapping("/form")
-	public String procesar(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status) {
-//		validador.validate(usuario, result);
-		
+	public String procesar(@Valid Usuario usuario, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			model.addAttribute("titulo", "Resultado Formulario Usuarios");
+			return "form";
+		}
+		return "redirect:/ver";
+	}
+	
+	@GetMapping("/ver")
+	public String ver(@SessionAttribute(name = "usuario", required = false) Usuario usuario, Model model, SessionStatus status) {
+		if (usuario == null) return "redirect:/form";
 		model.addAttribute("titulo", "Resultado Formulario Usuarios");
-		
-		/*Map<String, String> errores = new HashMap<>();
-		result.getFieldErrors().forEach(error -> {
-			errores.put(error.getField(), "El campo ".concat(error.getField()).concat(" ")
-					.concat(error.getDefaultMessage()));
-		});
-		model.addAttribute("error", errores);*/
-		if(result.hasErrors()) return "form";
 		status.setComplete();
-		model.addAttribute("usuario", usuario);
 		return "resultado";
 	}
 	

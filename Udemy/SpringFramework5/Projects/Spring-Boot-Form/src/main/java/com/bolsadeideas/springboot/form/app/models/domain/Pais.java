@@ -3,10 +3,12 @@ package com.bolsadeideas.springboot.form.app.models.domain;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Pais {
@@ -17,5 +19,12 @@ public class Pais {
 	private String codigo;
 	
 	private String nombre;
+
+	@Override
+	public String toString() {
+		return this.id.toString();
+	}
+	
+	
 	
 }

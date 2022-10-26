@@ -61,5 +61,12 @@ public class Usuario {
 	
 	@NotEmpty
 	private List<Rol> roles;
+	
+	private boolean habilitar;
+	
+	@NotEmpty
+	private String genero;
+	
+	private String valorSecreto;
 
 }

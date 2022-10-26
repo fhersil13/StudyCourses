@@ -1,10 +1,12 @@
 package com.bolsadeideas.springboot.form.app.models.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Rol {
@@ -15,4 +17,14 @@ public class Rol {
 	
 	private String rol;
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (!(obj instanceof Rol)) return false;
+		Rol rol = (Rol) obj;
+		return this.id != null && this.id.equals(rol.getId());
+	}
+
+	
+	
 }
