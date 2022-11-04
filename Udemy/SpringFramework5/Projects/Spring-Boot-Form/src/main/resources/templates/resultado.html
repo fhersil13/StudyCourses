@@ -6,6 +6,7 @@
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
+	<section th:replace="components/tiempo :: interceptor"></section>
 	<div class="container">
 		<a class="btn btn-success my-2" th:href="@{/form}" th:text="'Volver'"></a>
 		<ul class="list-group my-3">

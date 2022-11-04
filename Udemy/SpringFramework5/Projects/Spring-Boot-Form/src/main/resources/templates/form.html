@@ -6,8 +6,9 @@
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
-	<h2 th:text="${titulo}"></h2>
+	<section th:replace="components/tiempo :: interceptor"></section>
 	<div class="container">
+		<h2 th:text="${titulo}"></h2>
 		<form th:action="@{/form}" th:object="${usuario}" method="post">
 			<div class="form-group row">
 				<label class="col-form-label col-sm-2" for="habilitar">Habilitar</label>
